@@ -14,47 +14,110 @@ public class Kello : MonoBehaviour
 
     public TextMeshProUGUI digikello;
 
-    string aikasi;
+    public string aikasi;
     public InputField customaika;
+    public Toggle nappi;
+    public GameObject error;
+    
+    public bool on;
+
+    public float sSave;
+    public float mSave;
+    public float tSave;
+
+    public float nopeutus;
+
+    float sRad;
+    float mRad;
+    float tRad;
 
     void Update()
     {
         //Tietokoneen aika nyt
         DateTime aika = DateTime.Now;
-        
 
-        //aikayksiköt radiaaneiksi kelloa varten
-        //Viisareiden liikkeiden pehmentämiseksi lisätään aiempi aikayksikkö
-        float sRad = (float)((aika.Second + aika.Millisecond / 1000f) /60f) * -360f;
+        //onko kello päällä
+        if (on)
+        {
 
-        //Liikuttaa viisareita
-        sViisari.transform.eulerAngles = new Vector3(0, 0, sRad);
+            //aikayksiköt radiaaneiksi kelloa varten
+            //Viisareiden liikkeiden pehmentämiseksi lisätään aiempi aikayksikkö
+
+            //nopeutus on extra ominaisuus 
+            sRad = (float)((aika.Second + aika.Millisecond / 1000f) / (60f)) * -360f;
+
+            //Liikuttaa viisareita
+            sViisari.transform.eulerAngles = new Vector3(0, 0, sRad);
 
 
-        float mRad = (float)((aika.Minute + aika.Second / 60f) / 60f) * -360f ;
-        mViisari.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, mRad));
+            mRad = (float)((aika.Minute + aika.Second / 60f) / (60f)) * -360f;
+            mViisari.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, mRad));
 
-        float tRad = (float)((aika.Hour + aika.Minute / 60f) / 12f) * -360f;
-        tViisari.transform.eulerAngles = new Vector3(0, 0, tRad);
+            tRad = (float)((aika.Hour + aika.Minute / 60f) / (12f)) * -360f;
+            tViisari.transform.eulerAngles = new Vector3(0, 0, tRad);
 
-        
-        //lisää nollan digikelloon kun aikayksikkö on yksilukuinen
 
-        string sDigi = Mathf.Floor(aika.Second).ToString("00");
-        string mDigi = Mathf.Floor(aika.Minute).ToString("00");
-        string tDigi = Mathf.Floor(aika.Hour).ToString("00");
 
-        //sijoittaa ajan tekstikenttään
+            //lisää nollan digikelloon kun aikayksikkö on yksilukuinen
 
-        digikello.text = tDigi + ":" + mDigi + ":" + sDigi;
+            string sDigi = Mathf.Floor(aika.Second).ToString("00");
+            string mDigi = Mathf.Floor(aika.Minute).ToString("00");
+            string tDigi = Mathf.Floor(aika.Hour).ToString("00");
 
+            //sijoittaa ajan tekstikenttään
+            digikello.text = tDigi + ":" + mDigi + ":" + sDigi;
+
+        }
     }
 
 
-
-    void OmaAika()
+    //aseta oma aika
+    public void OmaAika()
     {
+        //sammuttaa kellon
+        on = false;
+        nappi.isOn = true;
+        //ottaa ajan input tekstikentästä
         aikasi = customaika.text;
-        Debug.Log(aikasi);
+
+        //erottaa aikayksiköt
+        try
+        {
+            String[] aikaerotettu = aikasi.Split(':');
+
+
+
+
+            // muuntaa inputin floatiksi ja aikayksiköt radiaaneiksi analogiselle
+            sRad = (float.Parse(aikaerotettu[2]) / 60f) * -360f;
+            mRad = ((float.Parse(aikaerotettu[1]) + (float.Parse(aikaerotettu[2]) / 60f)) / 60f) * -360f;
+            tRad = ((float.Parse(aikaerotettu[0]) + (float.Parse(aikaerotettu[1]) / 60f)) / 12f) * -360f;
+
+            //asettaa rotaatiot 
+            sViisari.transform.eulerAngles = new Vector3(0, 0, sRad);
+            mViisari.transform.eulerAngles = new Vector3(0, 0, mRad);
+            tViisari.transform.eulerAngles = new Vector3(0, 0, tRad);
+
+
+            //digikello
+            string sDigi = Mathf.Floor(float.Parse(aikaerotettu[2])).ToString("00");
+            string mDigi = Mathf.Floor(float.Parse(aikaerotettu[1])).ToString("00");
+            string tDigi = Mathf.Floor(float.Parse(aikaerotettu[0])).ToString("00");
+
+            digikello.text = tDigi + ":" + mDigi + ":" + sDigi;
+
+        }
+        catch
+        {
+            Debug.Log("error");
+            error.SetActive(true);
+        }
+        //Debug.Log(aikasi + "   " + sRad + mRad + tRad);
+    }
+
+    public void Sammuta(bool toggle)
+    {
+        error.SetActive(false);
+        on = !toggle;
     }
 }
