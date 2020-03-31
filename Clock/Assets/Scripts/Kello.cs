@@ -20,13 +20,10 @@ public class Kello : MonoBehaviour
     public GameObject error;
     
     public bool on;
+    public bool mss;
+    public string msDigi;
 
-    public float sSave;
-    public float mSave;
-    public float tSave;
-
-    public float nopeutus;
-
+    
     float sRad;
     float mRad;
     float tRad;
@@ -59,17 +56,31 @@ public class Kello : MonoBehaviour
 
 
             //lisää nollan digikelloon kun aikayksikkö on yksilukuinen
+            //millisekunnit
+      
+            string sDigi = Mathf.RoundToInt(aika.Second).ToString("00");
+            string mDigi = Mathf.RoundToInt(aika.Minute).ToString("00");
+            string tDigi = Mathf.RoundToInt(aika.Hour).ToString("00");
 
-            string sDigi = Mathf.Floor(aika.Second).ToString("00");
-            string mDigi = Mathf.Floor(aika.Minute).ToString("00");
-            string tDigi = Mathf.Floor(aika.Hour).ToString("00");
+            if (mss == true)
+            {
+                msDigi = ":" + Mathf.RoundToInt(aika.Millisecond).ToString("000");
+            }
+            else
+            {
+                msDigi = "";
+            }
 
             //sijoittaa ajan tekstikenttään
-            digikello.text = tDigi + ":" + mDigi + ":" + sDigi;
+            digikello.text = tDigi + ":" + mDigi + ":" + sDigi + msDigi;
 
         }
     }
 
+    public void MsToggle(bool toggle)
+    {
+        mss = toggle;
+    }
 
     //aseta oma aika
     public void OmaAika()
