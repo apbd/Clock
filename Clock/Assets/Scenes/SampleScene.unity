@@ -5600,7 +5600,7 @@ GameObject:
   - component: {fileID: 1116578241}
   - component: {fileID: 1116578243}
   m_Layer: 0
-  m_Name: kello_Controller
+  m_Name: kelloController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5688,7 +5688,7 @@ MonoBehaviour:
   digikello: {fileID: 194882008}
   aikasi: 
   customaika: {fileID: 1232626321}
-  nappi: {fileID: 2125381623}
+  stopnappi: {fileID: 2125381623}
   error: {fileID: 1723469215}
   on: 1
   mss: 0
@@ -6667,7 +6667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1814105031}
   m_Layer: 0
-  m_Name: Kello_object
+  m_Name: Kello
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
