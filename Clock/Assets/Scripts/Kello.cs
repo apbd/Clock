@@ -12,7 +12,7 @@ public class Kello : MonoBehaviour
     public GameObject mViisari;
     public GameObject tViisari;
 
-    //radiaanit
+    //asteet
     float sAste;
     float mAste;
     float tAste;
@@ -45,7 +45,7 @@ public class Kello : MonoBehaviour
         if (on)
         {
 
-            //aikayksiköt radiaaneiksi kelloa varten
+            //aikayksiköt asteiksi kelloa varten
             //Viisareiden liikkeiden pehmentämiseksi lisätään aiempi aikayksikkö
 
             sAste = (float)((aika.Second + aika.Millisecond / 1000f) / (60f)) * -360f;
@@ -107,7 +107,7 @@ public class Kello : MonoBehaviour
             //: kohdassa erottaa merkkijonot ja laittaa ne listaan 
             String[] aikaerotettu = aikasi.Split(':');
 
-            // muuntaa inputin floatiksi ja aikayksiköt radiaaneiksi analogiselle
+            // muuntaa inputin floatiksi ja aikayksiköt asteiksi analogiselle
             sAste = (float.Parse(aikaerotettu[2]) / 60f) * -360f;
             mAste = ((float.Parse(aikaerotettu[1]) + (float.Parse(aikaerotettu[2]) / 60f)) / 60f) * -360f;
             tAste = ((float.Parse(aikaerotettu[0]) + (float.Parse(aikaerotettu[1]) / 60f)) / 12f) * -360f;
