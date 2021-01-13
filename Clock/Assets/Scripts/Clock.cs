@@ -7,140 +7,135 @@ using UnityEngine.UI;
 
 public class Clock : MonoBehaviour
 {
-    //Viisarit
+    // Pointers
     public GameObject secondPointer;
     public GameObject minutePointer;
     public GameObject hourPointer;
 
-    //asteet
-    float sAste;
-    float mAste;
-    float tAste;
+    // Degrees for analog clock
+    float secondDegree;
+    float minuteDegree;
+    float hourDegree;
 
-    public TextMeshProUGUI digikello;
+    public TextMeshProUGUI digitalClock;
 
-
-
-    //extra ominaisuuksia
-
-    public string aikasi;
-    public InputField customaika;
-    public Toggle stopnappi;
+    // Custom time and other extra features
+    public string inputTime;
+    public InputField customTimeInputField;
+    public Toggle stopButton;
     public GameObject error;
     
-    public bool on;
-    public bool mss;
-    public string msDigi;
+    public bool clockIsOn;
+    public bool millisecondOptionOn;
+    public string millisecondsDigital;
 
 
     void Start()
     {
-        
+        secondPointer = GameObject.Find("SecondPointer");
+        minutePointer = GameObject.Find("MinutePointer");
+        hourPointer = GameObject.Find("HourPointer");
+        digitalClock = GameObject.Find("Clock/DigitalClockCanvas/DigitalClockText").GetComponent<TextMeshProUGUI>();
+
+        customTimeInputField = GameObject.Find("Canvas/InputField").GetComponent<InputField>();
+        error = GameObject.Find("Canvas/Error");
+        error.SetActive(false);
+
     }
 
     void Update()
     {
-        //Tietokoneen aika nyt
-        DateTime aika = DateTime.Now;
+        // Computer time now
+        DateTime time = DateTime.Now;
         
 
-        //onko kello päällä
-        if (on)
+        // Is the clock on
+        if (clockIsOn)
         {
+            // Change each unit of time to degree for analog clock 
+            // Add previous unit of time to soften pointer movement
+            secondDegree = (float)((time.Second + time.Millisecond / 1000f) / (60f)) * -360f;
+            secondPointer.transform.eulerAngles = new Vector3(0, 0, secondDegree);                          // Moves Pointers
 
-            //aikayksiköt asteiksi kelloa varten
-            //Viisareiden liikkeiden pehmentämiseksi lisätään aiempi aikayksikkö
+            minuteDegree = (float)((time.Minute + time.Second / 60f) / (60f)) * -360f;
+            minutePointer.transform.eulerAngles = new Vector3(0, 0, minuteDegree);
 
-            sAste = (float)((aika.Second + aika.Millisecond / 1000f) / (60f)) * -360f;
+            hourDegree = (float)((time.Hour + time.Minute / 60f) / (12f)) * -360f;
+            hourPointer.transform.eulerAngles = new Vector3(0, 0, hourDegree);
 
-            //Liikuttaa viisareita
-            secondPointer.transform.eulerAngles = new Vector3(0, 0, sAste);
+            // Add zero to digital clock when unit of time is single digit
+            string secondsDigitalClock = Mathf.RoundToInt(time.Second).ToString("00");
+            string minutesDigitalClock = Mathf.RoundToInt(time.Minute).ToString("00");
+            string hoursDigitalClock = Mathf.RoundToInt(time.Hour).ToString("00");
 
-
-            mAste = (float)((aika.Minute + aika.Second / 60f) / (60f)) * -360f;
-            minutePointer.transform.eulerAngles = new Vector3(0, 0, mAste);
-
-            tAste = (float)((aika.Hour + aika.Minute / 60f) / (12f)) * -360f;
-            hourPointer.transform.eulerAngles = new Vector3(0, 0, tAste);
-
-
-
-            //lisää nollan digikelloon kun aikayksikkö on yksilukuinen
-
-            string sDigi = Mathf.RoundToInt(aika.Second).ToString("00");
-            string mDigi = Mathf.RoundToInt(aika.Minute).ToString("00");
-            string tDigi = Mathf.RoundToInt(aika.Hour).ToString("00");
-
-            //millisekunnit jotka näkyvät jos toggle on päällä
-            if (mss == true)
+            // Add Milliseconds
+            if (millisecondOptionOn == true)
             {
-                msDigi = ":" + Mathf.RoundToInt(aika.Millisecond).ToString("000");
+                millisecondsDigital = ":" + Mathf.RoundToInt(time.Millisecond).ToString("000");
             }
             else
             {
-                msDigi = "";
+                millisecondsDigital= "";
             }
 
-            //sijoittaa ajan tekstikenttään
-            digikello.text = tDigi + ":" + mDigi + ":" + sDigi + msDigi;
+            // Puts time to digital clock text field
+            digitalClock.text = hoursDigitalClock + ":" + minutesDigitalClock + ":" + secondsDigitalClock + millisecondsDigital;
 
         }
     }
 
-    //millisekunttitoggle
-    public void MsToggle(bool toggle)
+    // Milliseconds toggle
+    public void MillisecondToggle(bool toggle)
     {
-        mss = toggle;
+        millisecondOptionOn = toggle;
     }
 
-    //aseta oma aika
-    public void OmaAika()
+    // Custom time
+    public void CustomTime()
     {
-        //sammuttaa kellon
-        on = false;
-        stopnappi.isOn = true;
+        // Shutsdown clock
+        clockIsOn = false;
+        stopButton.isOn = true;
 
-        //ottaa ajan input tekstikentästä
-        aikasi = customaika.text;
+        // Takes time from inputfield
+        inputTime = customTimeInputField.text;
 
-        
-        //virheiden varalta
         try
         {
-            //: kohdassa erottaa merkkijonot ja laittaa ne listaan 
-            String[] aikaerotettu = aikasi.Split(':');
+            // Separates strings and puts them in a list
+            String[] separatedTime = inputTime.Split(':');
 
-            // muuntaa inputin floatiksi ja aikayksiköt asteiksi analogiselle
-            sAste = (float.Parse(aikaerotettu[2]) / 60f) * -360f;
-            mAste = ((float.Parse(aikaerotettu[1]) + (float.Parse(aikaerotettu[2]) / 60f)) / 60f) * -360f;
-            tAste = ((float.Parse(aikaerotettu[0]) + (float.Parse(aikaerotettu[1]) / 60f)) / 12f) * -360f;
+            // Changes input to float as well as unit of times to degrees for analog
+            secondDegree = (float.Parse(separatedTime[2]) / 60f) * -360f;
+            minuteDegree = ((float.Parse(separatedTime[1]) + (float.Parse(separatedTime[2]) / 60f)) / 60f) * -360f;
+            hourDegree = ((float.Parse(separatedTime[0]) + (float.Parse(separatedTime[1]) / 60f)) / 12f) * -360f;
 
-            //asettaa rotaatiot 
-            secondPointer.transform.eulerAngles = new Vector3(0, 0, sAste);
-            minutePointer.transform.eulerAngles = new Vector3(0, 0, mAste);
-            hourPointer.transform.eulerAngles = new Vector3(0, 0, tAste);
+            // Sets rotations
+            secondPointer.transform.eulerAngles = new Vector3(0, 0, secondDegree);
+            minutePointer.transform.eulerAngles = new Vector3(0, 0, minuteDegree);
+            hourPointer.transform.eulerAngles = new Vector3(0, 0, hourDegree);
 
-            //oman ajan digikello
-            string sDigi = Mathf.Floor(float.Parse(aikaerotettu[2])).ToString("00");
-            string mDigi = Mathf.Floor(float.Parse(aikaerotettu[1])).ToString("00");
-            string tDigi = Mathf.Floor(float.Parse(aikaerotettu[0])).ToString("00");
+            // Custom time for digital clock
+            string secondDigital = Mathf.Floor(float.Parse(separatedTime[2])).ToString("00");
+            string minutesDigital = Mathf.Floor(float.Parse(separatedTime[1])).ToString("00");
+            string hoursDigital = Mathf.Floor(float.Parse(separatedTime[0])).ToString("00");
 
-            digikello.text = tDigi + ":" + mDigi + ":" + sDigi;
+            digitalClock.text = hoursDigital + ":" + minutesDigital + ":" + secondDigital;
 
         }
         catch
         {
-            //punainen error teksti
+            // Red error text
             Debug.Log("input error");
             error.SetActive(true);
         }
       
     }
 
-    //sammuttaa kellon jos toggle on päällä
-    public void Sammuta(bool toggle)
+    // Stop clock toggle
+    public void StopClock(bool toggle)
     {
         error.SetActive(false);
-        on = !toggle;
+        clockIsOn = !toggle;
     }
 }

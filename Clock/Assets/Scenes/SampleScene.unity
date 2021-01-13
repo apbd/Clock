@@ -5578,7 +5578,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1116578243}
-        m_MethodName: MsToggle
+        m_MethodName: MillisecondToggle
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5686,14 +5686,14 @@ MonoBehaviour:
   secondPointer: {fileID: 0}
   minutePointer: {fileID: 0}
   hourPointer: {fileID: 0}
-  digikello: {fileID: 194882008}
-  aikasi: 
-  customaika: {fileID: 1232626321}
-  stopnappi: {fileID: 2125381623}
-  error: {fileID: 1723469215}
-  on: 1
-  mss: 0
-  msDigi: 
+  digitalClock: {fileID: 0}
+  inputTime: 
+  customTimeInputField: {fileID: 1232626321}
+  stopButton: {fileID: 2125381623}
+  error: {fileID: 0}
+  clockIsOn: 1
+  millisecondOptionOn: 0
+  millisecondsDigital: 
 --- !u!1 &1230903361
 GameObject:
   m_ObjectHideFlags: 0
@@ -5869,7 +5869,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1116578243}
-        m_MethodName: OmaAika
+        m_MethodName: CustomTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6574,7 +6574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1723469216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6896,7 +6896,7 @@ GameObject:
   - component: {fileID: 2125381622}
   - component: {fileID: 2125381623}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: StopToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6970,7 +6970,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1116578243}
-        m_MethodName: Sammuta
+        m_MethodName: StopClock
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
