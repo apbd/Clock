@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 194882009}
   - component: {fileID: 194882008}
   m_Layer: 5
-  m_Name: digikello
+  m_Name: DigitalClockText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -388,7 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287740329}
   m_Layer: 0
-  m_Name: sekunti
+  m_Name: SecondPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5174,7 +5175,7 @@ GameObject:
   - component: {fileID: 499067668}
   - component: {fileID: 499067667}
   m_Layer: 0
-  m_Name: tuntiviis
+  m_Name: spriteObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5406,7 +5407,7 @@ GameObject:
   - component: {fileID: 706363498}
   - component: {fileID: 706363497}
   m_Layer: 5
-  m_Name: DigikelloCanvas
+  m_Name: DigitalClockCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5503,7 +5504,7 @@ GameObject:
   - component: {fileID: 901904214}
   - component: {fileID: 901904215}
   m_Layer: 5
-  m_Name: mstoggle
+  m_Name: MillisecondToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5600,7 +5601,7 @@ GameObject:
   - component: {fileID: 1116578241}
   - component: {fileID: 1116578243}
   m_Layer: 0
-  m_Name: kelloController
+  m_Name: ClockController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5682,9 +5683,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a8ba51ab57f0544afb310998c0feab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sViisari: {fileID: 287740328}
-  mViisari: {fileID: 1783074980}
-  tViisari: {fileID: 1938182180}
+  secondPointer: {fileID: 0}
+  minutePointer: {fileID: 0}
+  hourPointer: {fileID: 0}
   digikello: {fileID: 194882008}
   aikasi: 
   customaika: {fileID: 1232626321}
@@ -5704,7 +5705,7 @@ GameObject:
   - component: {fileID: 1230903362}
   - component: {fileID: 1230903363}
   m_Layer: 0
-  m_Name: keskipallo
+  m_Name: MiddleBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5914,6 +5915,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5946,7 +5948,7 @@ GameObject:
   - component: {fileID: 1254572842}
   - component: {fileID: 1254572841}
   m_Layer: 0
-  m_Name: minviis
+  m_Name: spriteObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6028,7 +6030,7 @@ GameObject:
   - component: {fileID: 1448363023}
   - component: {fileID: 1448363022}
   m_Layer: 5
-  m_Name: Text
+  m_Name: InputText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6068,6 +6070,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6104,7 +6107,7 @@ GameObject:
   - component: {fileID: 1454177396}
   - component: {fileID: 1454177395}
   m_Layer: 0
-  m_Name: sekuntiviis
+  m_Name: spriteObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6226,6 +6229,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6300,6 +6304,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6333,7 +6338,7 @@ GameObject:
   - component: {fileID: 1586686078}
   - component: {fileID: 1586686077}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: PlaceholderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6373,6 +6378,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.5}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6451,6 +6457,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6524,6 +6531,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6601,6 +6609,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.6226415, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6617,7 +6626,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: use the correct format and no milliseconds
+  m_Text: Use the correct format and no milliseconds.
 --- !u!222 &1723469218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6636,7 +6645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1783074981}
   m_Layer: 0
-  m_Name: minuutti
+  m_Name: MinutePointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6667,7 +6676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1814105031}
   m_Layer: 0
-  m_Name: Kello
+  m_Name: Clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6745,6 +6754,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6780,7 +6790,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1938182181}
   m_Layer: 0
-  m_Name: tunti
+  m_Name: HourPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6853,6 +6863,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
