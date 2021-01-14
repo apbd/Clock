@@ -1,3 +1,3 @@
 # Clock
-A working realtime analog and digital clock.
+Realtime analog and digital clock made using Unity.
 
